@@ -40,11 +40,7 @@ This is a **private storage baseline**, not a complete production deployment.
 
 ## 🎯 Why this example exists
 
-After understanding:
-- public endpoints with restricted access (Example 04),
-- network rules as a first security boundary,
-
-the next logical step is to **introduce private connectivity**
+The next logical step for secure storage is to **introduce private connectivity**
 and remove the public storage surface from the data path.
 
 Private Endpoints provide:
@@ -60,7 +56,7 @@ This example focuses on:
 Blob Containers are created to define **data intent**, not consumption.
 
 Integration with compute services (VMs, AKS, CI/CD pipelines)
-is introduced in later examples.
+is intentionally out of scope for this example.
 
 ---
 
@@ -74,6 +70,11 @@ Network Rules are enabled to:
 In fully private environments, data-plane provisioning
 would typically run from within the Virtual Network
 (e.g. via a private runner).
+
+Important:
+- set `my_public_ip` in `terraform.tfvars` before running `tofu apply`
+- if `my_public_ip` is empty or stale, `tofu destroy` can fail with 403
+  because Terraform cannot read/delete blob containers through the data plane
 
 ---
 
@@ -103,6 +104,18 @@ and Private DNS zone association.*
 ```bash
 tofu destroy
 ```
+
+---
+
+## 🛠️ Troubleshooting
+
+- **403 on `tofu destroy` (storage containers):**  
+  Make sure `my_public_ip` in `terraform.tfvars` is your **current** public IP.
+  If the IP changed, storage network rules will block Terraform from reading/deleting containers.
+
+- **Slow deletion of Private DNS VNet link:**  
+  `azurerm_private_dns_zone_virtual_network_link` can take several minutes to delete.
+  This is normal in Azure; if it hangs for >10 minutes, retry `tofu destroy`.
 
 ---
 
