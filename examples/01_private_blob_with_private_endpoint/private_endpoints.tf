@@ -1,5 +1,5 @@
 module "private_endpoint_blob" {
-  source = "../../"
+  source = "github.com/mlinxfeld/terraform-az-fk-private-endpoint"
 
   name                = local.pe_name
   location            = azurerm_resource_group.foggykitchen_rg.location
