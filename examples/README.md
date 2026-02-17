@@ -24,9 +24,9 @@ They are part of the **[FoggyKitchen.com training ecosystem](https://foggykitche
 
 | Example | Title | Key Topics |
 |--------|-------|------------|
-| 01 | **Private Blob with Private Endpoint** | Blob private endpoint, Private DNS, locked down storage |
-| 02 | **Private ACR with AKS and Private Endpoint** | AKS pulls images from ACR via private endpoint and Private DNS |
-| 03 | **Private Azure Files with Private Endpoint** | SMB access to Azure Files from private VMs via private endpoint |
+| 01 | **Private Blob with Private Endpoint** | Blob private endpoint + Private DNS module, locked down storage |
+| 02 | **Private ACR with AKS and Private Endpoint** | AKS pulls images from ACR via private endpoint + Private DNS module |
+| 03 | **Private Azure Files with Private Endpoint** | SMB access to Azure Files from private VMs via private endpoint + Private DNS module |
 
 Each example introduces **one clear private connectivity concept** and can be applied
 **independently** for learning, experimentation, or reuse.
@@ -71,8 +71,8 @@ These examples follow strict design rules:
 
 - One example = one architectural concept  
 - Explicit modeling of:
-  - private endpoint placement in dedicated subnets  
-  - private DNS zones and VNet links  
+- private endpoint placement in dedicated subnets  
+  - private DNS zones and VNet links (via `terraform-az-fk-private-dns`)  
   - PaaS services accessed **only** via private endpoints  
 - Clear separation of concerns:
   - networking (VNet, subnet)  
@@ -96,6 +96,7 @@ The goal is **clarity and correctness**, not completeness.
 ## 🔗 Related Modules & Training
 
 - [terraform-az-fk-private-endpoint](https://github.com/mlinxfeld/terraform-az-fk-private-endpoint) (this repository)  
+- [terraform-az-fk-private-dns](https://github.com/mlinxfeld/terraform-az-fk-private-dns)  
 - [terraform-az-fk-vnet](https://github.com/mlinxfeld/terraform-az-fk-vnet)  
 - [terraform-az-fk-storage](https://github.com/mlinxfeld/terraform-az-fk-storage)  
 - [terraform-az-fk-compute](https://github.com/mlinxfeld/terraform-az-fk-compute)  

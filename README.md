@@ -1,6 +1,6 @@
 # terraform-az-fk-private-endpoint
 
-This repository contains a reusable **Terraform / OpenTofu module** and progressive examples for deploying **Azure Private Endpoints** with optional **Private DNS Zone** integration.
+This repository contains a reusable **Terraform / OpenTofu module** and progressive examples for deploying **Azure Private Endpoints** with optional **Private DNS Zone** integration (via `terraform-az-fk-private-dns`).
 
 It is part of the **[FoggyKitchen.com training ecosystem](https://foggykitchen.com/courses-2/)** and is designed as a dedicated **private connectivity layer** for Azure PaaS services.
 
@@ -16,8 +16,8 @@ It focuses on:
 - Private Endpoints as **first-class private connectivity primitives**
 - Explicit modeling of:
   - private endpoint NIC placement
-  - private service connection configuration
-  - optional Private DNS zone integration
+- private service connection configuration
+- optional Private DNS zone integration (via `terraform-az-fk-private-dns`)
 - Clear separation between:
   - **PaaS service resources** (Storage, ACR, Key Vault, etc.)
   - **Private connectivity** (Private Endpoint module)
@@ -41,7 +41,7 @@ The module intentionally does **not** create or manage:
 
 - Virtual Networks or subnets (handled by `terraform-az-fk-vnet`)
 - Storage Accounts / ACR / Key Vault / other PaaS services
-- Private DNS zones (created in examples or other modules)
+- Private DNS zones (handled by `terraform-az-fk-private-dns`)
 - Network Security Groups or firewall policies
 
 Each of those concerns belongs in its own dedicated module.
@@ -84,7 +84,7 @@ module "private_endpoint" {
   subresource_names              = ["blob"]
 
   private_dns_zone_group_name = "default"
-  private_dns_zone_ids        = [azurerm_private_dns_zone.blob.id]
+  private_dns_zone_ids        = [module.private_dns.private_dns_zone_ids["privatelink.blob.core.windows.net"]]
 
   tags = {
     project = "foggykitchen"
@@ -123,6 +123,7 @@ This repository intentionally avoids abstractions that hide Private Endpoint mec
 
 ## 🧩 Related Modules & Training
 
+- [terraform-az-fk-private-dns](https://github.com/mlinxfeld/terraform-az-fk-private-dns)  
 - [terraform-az-fk-vnet](https://github.com/mlinxfeld/terraform-az-fk-vnet)  
 - [terraform-az-fk-storage](https://github.com/mlinxfeld/terraform-az-fk-storage)  
 - [terraform-az-fk-compute](https://github.com/mlinxfeld/terraform-az-fk-compute)  

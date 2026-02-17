@@ -13,11 +13,11 @@ module "private_endpoint_acr" {
   is_manual_connection           = false
 
   private_dns_zone_group_name = "acr-dns-zone-group"
-  private_dns_zone_ids        = var.enable_private_dns ? [azurerm_private_dns_zone.foggykitchen_acr_dns_zone[0].id] : []
+  private_dns_zone_ids        = var.enable_private_dns ? [module.private_dns[0].private_dns_zone_ids["privatelink.azurecr.io"]] : []
 
   tags = var.tags
 
   depends_on = [
-    azurerm_private_dns_zone_virtual_network_link.foggykitchen_acr_dns_zone_link
+    module.private_dns
   ]
 }

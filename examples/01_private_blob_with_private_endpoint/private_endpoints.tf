@@ -11,7 +11,7 @@ module "private_endpoint_blob" {
   is_manual_connection           = false
 
   private_dns_zone_group_name = "default"
-  private_dns_zone_ids        = [azurerm_private_dns_zone.fk_blob_dns_zone.id]
+  private_dns_zone_ids        = [module.private_dns.private_dns_zone_ids[local.dns_zone_name]]
 
   tags = var.tags
 }
