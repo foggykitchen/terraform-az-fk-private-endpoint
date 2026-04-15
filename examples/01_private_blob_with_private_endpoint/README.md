@@ -18,12 +18,13 @@ This course shows how this pattern fits into a complete, production-ready Azure 
 
 --- 
 
-In this storage example, we move from **restricted public access**
-to **private connectivity** by introducing a **Private Endpoint for Azure Blob Storage**
+This example introduces a **Private Endpoint for Azure Blob Storage**
 using **Terraform / OpenTofu**.
 
-This example focuses on **private network access and DNS resolution**
-while still defining **data intent** through Blob Containers.
+It focuses on:
+- private network access
+- DNS resolution
+- defining data intent via Blob Containers
 
 No compute resources are attached.
 
