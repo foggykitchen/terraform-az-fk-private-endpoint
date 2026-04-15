@@ -2,8 +2,7 @@
 
 ## 🚀 Learn the full Azure architecture
 
-This example shows only one piece of the puzzle:  
-**private access to Azure Blob Storage using a Private Endpoint.**
+This example shows only one piece of the puzzle: **private access to Azure Blob Storage using a Private Endpoint.**
 
 In real-world architectures, this pattern is combined with:
 
